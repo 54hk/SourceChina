@@ -15,6 +15,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import practice.code.com.sourcechina.R;
+import practice.code.com.sourcechina.fragment.CompositeFragment;
 import practice.code.com.sourcechina.fragment.RecommendBlogsFragment;
 
 public class ActivityMain extends AppCompatActivity {
@@ -60,16 +61,30 @@ public class ActivityMain extends AppCompatActivity {
             compositeFragment = new CompositeFragment();
             transaction.add(R.id.activity_main_fl,compositeFragment);
         }
-        //隐藏所有fragment
         hideFragment(transaction);
+        //隐藏所有fragment
         //显示需要显示的fragment
         transaction.show(compositeFragment);
-
-
         transaction.commit();
     }
 
 
+    //显示第2个fragment
+    private void initFragment2(){
+        //开启事务，fragment的控制是由事务来实现的
+       FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+
+        if(recommendBlogsFragment == null){
+            recommendBlogsFragment = new RecommendBlogsFragment();
+            transaction.add(R.id.activity_main_fl,recommendBlogsFragment);
+        }
+        hideFragment(transaction);
+        //隐藏所有fragment
+        //显示需要显示的fragment
+        transaction.show(recommendBlogsFragment);
+        transaction.commit();
+    }
 
     private void hideFragment(FragmentTransaction transaction){
         if(compositeFragment != null){
@@ -83,13 +98,14 @@ public class ActivityMain extends AppCompatActivity {
 
     @OnClick({R.id.sum_bt, R.id.ball_bt, R.id.find_bt, R.id.mime_bt})
     public void onViewClicked(View view) {
-
+//        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+//        hideFragment(transaction);
         switch (view.getId()) {
             case R.id.sum_bt:
                 initFragment1();
                 break;
             case R.id.ball_bt:
-
+                initFragment2();
                 break;
             case R.id.find_bt:
                 break;
