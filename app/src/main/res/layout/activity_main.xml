@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="practice.code.com.sourcechina.MainActivity">
+
+    <FrameLayout
+        android:id="@+id/activity_main_fl"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        >
+    </FrameLayout>
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="5"
+        >
+
+        <RadioButton
+            android:id="@+id/sum_bt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:button="@null"
+            android:gravity="center"
+            android:text="综合"
+            android:textColor="@drawable/txt_selector"
+           android:drawableTop="@drawable/sum_selector"
+            android:layout_weight="1"
+            />
+
+        <RadioButton
+            android:id="@+id/ball_bt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:button="@null"
+            android:gravity="center"
+            android:text="动弹"
+            android:textColor="@drawable/txt_selector"
+            android:drawableTop="@drawable/tweet_selector"
+            android:layout_weight="1"
+            />
+
+        <ImageView
+            android:id="@+id/find_bt"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+           android:src="@mipmap/ic_nav_add_normal"
+            android:layout_weight="1"
+            />
+
+        <RadioButton
+            android:id="@+id/mime_bt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:button="@null"
+            android:gravity="center"
+            android:text="发现"
+            android:textColor="@drawable/txt_selector"
+            android:drawableTop="@drawable/find_selector"
+            android:layout_weight="1"
+            />
+
+        <RadioButton
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:button="@null"
+            android:gravity="center"
+            android:text="我的"
+            android:textColor="@drawable/txt_selector"
+            android:drawableTop="@drawable/mine_selector"
+            android:layout_weight="1"
+            />
+
+    </RadioGroup>
+
+</LinearLayout>
