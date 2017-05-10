@@ -1,5 +1,6 @@
 package practice.code.com.sourcechina.Activity;
 
+
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -13,7 +14,10 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import practice.code.com.sourcechina.R;
 import practice.code.com.sourcechina.adapter.CompositeVPAdapter;
+import practice.code.com.sourcechina.adapter.HeadAdapter;
+import practice.code.com.sourcechina.fragment.HeadFragment;
 import practice.code.com.sourcechina.fragment.Head_message_Fragment;
+import practice.code.com.sourcechina.fragment.RecommendBlogsFragment;
 
 public class CompositeActivity extends AppCompatActivity {
 
@@ -31,11 +35,11 @@ public class CompositeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_composite);
         ButterKnife.bind(this);
 
-        for(int i = 0; i < 5;i++){
-            Head_message_Fragment fragment = new Head_message_Fragment();
-            fragments.add(fragment);
-        }
 
+        HeadFragment headFragment = new HeadFragment();
+        fragments.add(headFragment);
+        RecommendBlogsFragment recommendBlogsFragment  =   new RecommendBlogsFragment();
+        fragments.add(recommendBlogsFragment);
         CompositeVPAdapter comVPAdapter = new CompositeVPAdapter(getSupportFragmentManager(),fragments);
 
         activityCompositeVp.setAdapter(comVPAdapter);

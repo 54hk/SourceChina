@@ -1,11 +1,13 @@
 package practice.code.com.sourcechina.Activity;
 
 import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
-import android.os.Bundle;
 
+
+import android.support.v4.app.FragmentManager;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -19,7 +21,7 @@ import practice.code.com.sourcechina.R;
 import practice.code.com.sourcechina.fragment.HeadFragment;
 import practice.code.com.sourcechina.fragment.RecommendBlogsFragment;
 
-public class ActivityMain extends Activity {
+public class ActivityMain extends AppCompatActivity {
 
     @Bind(R.id.activity_main_fl)
     FrameLayout activityMainFl;
@@ -36,8 +38,10 @@ public class ActivityMain extends Activity {
     private HeadFragment headFragment;
     private Fragment BaseFragment;
     private RecommendBlogsFragment recommendBlogsFragment;
-    private FragmentManager fragmentManager;
+
     private FragmentTransaction fragmentTransaction;
+    private FragmentManager fragmentManager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,21 +50,20 @@ public class ActivityMain extends Activity {
         ButterKnife.bind(this);
 
 
-
-        fragmentManager = getFragmentManager();
+        fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
         headFragment = new HeadFragment();
         if (BaseFragment!=null){
-            fragmentTransaction.hide(BaseFragment);
+            this.fragmentTransaction.hide(BaseFragment);
         }
-        fragmentTransaction.add(R.id.activity_main_fl, headFragment,"1");
+        this.fragmentTransaction.add(R.id.activity_main_fl, headFragment,"1");
         BaseFragment=headFragment;
-        fragmentTransaction.commit();
+        this.fragmentTransaction.commit();
     }
 
     @OnClick({R.id.sum_bt, R.id.ball_bt, R.id.find_bt, R.id.mime_bt})
     public void onViewClicked(View view) {
-        fragmentManager = getFragmentManager();
+        fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
         switch (view.getId()) {
             case R.id.sum_bt:
@@ -87,7 +90,6 @@ public class ActivityMain extends Activity {
                 break;
         }
     }
-
 
 
 }

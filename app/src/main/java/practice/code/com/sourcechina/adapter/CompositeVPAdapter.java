@@ -1,5 +1,7 @@
 package practice.code.com.sourcechina.adapter;
 
+
+
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -12,7 +14,7 @@ import java.util.ArrayList;
 
 public class CompositeVPAdapter extends FragmentPagerAdapter {
 
-    String[] arr = new String[]{"开源咨询","推荐博客","技术问答","每日一搏","热门资讯"};
+    String[] arr = new String[]{"开源咨询","推荐博客"};
     ArrayList<Fragment> fragments;
     public CompositeVPAdapter(FragmentManager fm,ArrayList<Fragment> fragments) {
         super(fm);
