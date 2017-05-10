@@ -28,6 +28,7 @@ public class HeadAdapter extends BaseAdapter<HeadXMLBean.NewsBean> {
     public void convert(ViewHolder holder, HeadXMLBean.NewsBean newsBean) {
         holder.setText(R.id.head_title, newsBean.getTitle());
         holder.setText(R.id.head_body, newsBean.getBody());
-        holder.setText(R.id.head_auther_or_time, newsBean.getAuthor() + "  " + newsBean.getPubDate());
+        holder.setText(R.id.head_auther_or_time,
+                "@" +newsBean.getAuthor() + "  " + newsBean.getPubDate());
     }
 }

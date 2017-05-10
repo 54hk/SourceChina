@@ -6,7 +6,9 @@
     <com.jude.rollviewpager.RollPagerView
         android:id="@+id/head_pv"
         android:layout_width="match_parent"
-        android:layout_height="150dp"></com.jude.rollviewpager.RollPagerView>
+        android:layout_height="150dp">
+
+    </com.jude.rollviewpager.RollPagerView>
 
 
 </LinearLayout>

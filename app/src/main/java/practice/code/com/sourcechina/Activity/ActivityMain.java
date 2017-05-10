@@ -1,11 +1,8 @@
 package practice.code.com.sourcechina.Activity;
 
-import android.app.Activity;
 
 
-import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -18,7 +15,6 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import practice.code.com.sourcechina.R;
-import practice.code.com.sourcechina.fragment.HeadFragment;
 import practice.code.com.sourcechina.fragment.RecommendBlogsFragment;
 
 public class ActivityMain extends AppCompatActivity {
@@ -35,12 +31,10 @@ public class ActivityMain extends AppCompatActivity {
     ImageView findBt;
     @Bind(R.id.mime_bt)
     RadioButton mimeBt;
-    private HeadFragment headFragment;
-    private Fragment BaseFragment;
+    private CompositeFragment compositeFragment;
     private RecommendBlogsFragment recommendBlogsFragment;
 
-    private FragmentTransaction fragmentTransaction;
-    private FragmentManager fragmentManager;
+
 
 
     @Override
@@ -49,40 +43,53 @@ public class ActivityMain extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
+        initFragment1();
 
-        fragmentManager = getSupportFragmentManager();
-        fragmentTransaction = fragmentManager.beginTransaction();
-        headFragment = new HeadFragment();
-        if (BaseFragment!=null){
-            this.fragmentTransaction.hide(BaseFragment);
+        sumBt.setChecked(true);
+
+    }
+
+
+    //显示第一个fragment
+    private void initFragment1(){
+        //开启事务，fragment的控制是由事务来实现的
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+        //第一种方式（add），初始化fragment并添加到事务中，如果为null就new一个
+        if(compositeFragment == null){
+            compositeFragment = new CompositeFragment();
+            transaction.add(R.id.activity_main_fl,compositeFragment);
         }
-        this.fragmentTransaction.add(R.id.activity_main_fl, headFragment,"1");
-        BaseFragment=headFragment;
-        this.fragmentTransaction.commit();
+        //隐藏所有fragment
+        hideFragment(transaction);
+        //显示需要显示的fragment
+        transaction.show(compositeFragment);
+
+
+        transaction.commit();
+    }
+
+
+
+    private void hideFragment(FragmentTransaction transaction){
+        if(compositeFragment != null){
+            transaction.hide(compositeFragment);
+        }
+        if(recommendBlogsFragment != null){
+            transaction.hide(recommendBlogsFragment);
+        }
+
     }
 
     @OnClick({R.id.sum_bt, R.id.ball_bt, R.id.find_bt, R.id.mime_bt})
     public void onViewClicked(View view) {
-        fragmentManager = getSupportFragmentManager();
-        fragmentTransaction = fragmentManager.beginTransaction();
+
         switch (view.getId()) {
             case R.id.sum_bt:
-                headFragment = new HeadFragment();
-                if (BaseFragment!=null){
-                    fragmentTransaction.hide(BaseFragment);
-                }
-                fragmentTransaction.add(R.id.activity_main_fl, headFragment,"1");
-                BaseFragment=headFragment;
-                fragmentTransaction.commit();
+                initFragment1();
                 break;
             case R.id.ball_bt:
-                recommendBlogsFragment = new RecommendBlogsFragment();
-                if (BaseFragment!=null){
-                    fragmentTransaction.hide(BaseFragment);
-                }
-                fragmentTransaction.add(R.id.activity_main_fl,recommendBlogsFragment,"2");
-                BaseFragment=recommendBlogsFragment;
-                fragmentTransaction.commit();
+
                 break;
             case R.id.find_bt:
                 break;
