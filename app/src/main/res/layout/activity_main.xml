@@ -95,6 +95,7 @@
             />
 
         <RadioButton
+            android:id="@+id/mine_true"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:button="@null"

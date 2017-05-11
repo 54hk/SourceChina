@@ -4,7 +4,6 @@ package practice.code.com.sourcechina.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -18,6 +17,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import practice.code.com.sourcechina.R;
 import practice.code.com.sourcechina.fragment.CompositeFragment;
+import practice.code.com.sourcechina.fragment.MineFragment;
 import practice.code.com.sourcechina.fragment.RecommendBlogsFragment;
 
 public class ActivityMain extends AllActivityParent {
@@ -40,8 +40,11 @@ public class ActivityMain extends AllActivityParent {
     ImageView barImage;
     @Bind(R.id.main_bar)
     RelativeLayout mainBar;
+    @Bind(R.id.mine_true)
+    RadioButton mineTrue;
     private CompositeFragment compositeFragment;
     private RecommendBlogsFragment recommendBlogsFragment;
+    private MineFragment mineFragment;
 
 
     @Override
@@ -92,6 +95,24 @@ public class ActivityMain extends AllActivityParent {
         transaction.commit();
     }
 
+    //显示第2个fragment
+    private void initFragment4() {
+        mainBar.setVisibility(View.GONE);
+        //开启事务，fragment的控制是由事务来实现的
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+
+        if (mineFragment == null) {
+            mineFragment = new MineFragment();
+            transaction.add(R.id.activity_main_fl, mineFragment);
+        }
+        hideFragment(transaction);
+        //隐藏所有fragment
+        //显示需要显示的fragment
+        transaction.show(mineFragment);
+        transaction.commit();
+    }
+
 
     private void hideFragment(FragmentTransaction transaction) {
         if (compositeFragment != null) {
@@ -99,6 +120,10 @@ public class ActivityMain extends AllActivityParent {
         }
         if (recommendBlogsFragment != null) {
             transaction.hide(recommendBlogsFragment);
+        }
+
+        if (mineFragment != null) {
+            transaction.hide(mineFragment);
         }
 
     }
@@ -120,6 +145,7 @@ public class ActivityMain extends AllActivityParent {
                 barTxt.setText("发现");
                 break;
             case R.id.mime_bt:
+
                 break;
         }
     }
@@ -129,5 +155,10 @@ public class ActivityMain extends AllActivityParent {
     public void onViewClicked() {
         Intent intent = new Intent(ActivityMain.this, BallCommentActivity.class);
         startActivity(intent);
+    }
+
+    @OnClick(R.id.mine_true)
+    public void onmineClicked() {
+        initFragment4();
     }
 }
