@@ -37,8 +37,10 @@ import practice.code.com.sourcechina.R;
 import practice.code.com.sourcechina.adapter.HeadAdapter;
 import practice.code.com.sourcechina.adapter.TestNormalAdapter;
 import practice.code.com.sourcechina.entity.HeadXMLBean;
+import practice.code.com.sourcechina.model.HttpUtil.NewsUtil;
+import practice.code.com.sourcechina.model.bis.ICallBack;
 
-public class HeadFragment extends Fragment {
+public class HeadFragment extends Fragment implements ICallBack{
 
 
     PullToRefreshRecyclerView headRefreshRv;
@@ -50,6 +52,8 @@ public class HeadFragment extends Fragment {
     private View inflate;
     private View inflate1;
     ProgressDialog progressDialog;
+    private boolean iiboolean;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -85,9 +89,6 @@ public class HeadFragment extends Fragment {
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         headRefreshRv.setLayoutManager(linearLayoutManager);
-
-        headRefreshRv.setAdapter(headAdapter);
-
         headRefreshRv.setPullToRefreshListener(new PullToRefreshListener() {
             @Override
             public void onRefresh() {
@@ -102,60 +103,43 @@ public class HeadFragment extends Fragment {
             }
         });
         headRefreshRv.addHeaderView(inflate);
+        headRefreshRv.setAdapter(headAdapter);
 
     }
 
-    public void getHeadVolley(final boolean isboolean) {
-        String url = "http://www.oschina.net/action/api/news_list";
-        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+    public void getHeadVolley(boolean aboolean) {
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
-
-
-            @Override
-            public void onResponse(String response) {
+        iiboolean = aboolean;
+        NewsUtil.getInstance().getNewsList(flag,this);
 
 
-                if(flag == 1){
-                    progressDialog.dismiss();
-                }
-                XStream xs = new XStream();
-                xs.alias("oschina", HeadXMLBean.class);
-                xs.alias("news", HeadXMLBean.NewsBean.class);
-                HeadXMLBean headXMLBean = (HeadXMLBean) xs.fromXML(response);
-                newslist = headXMLBean.getNewslist();
-                newsBeenList.addAll(newslist);
-                headAdapter.notifyDataSetChanged();
-
-                if (isboolean) {
-                    headRefreshRv.setLoadMoreComplete();
-                } else {
-                    headRefreshRv.setRefreshComplete();
-                }
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.e("call", error.toString());
-            }
-        }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-
-                Map<String, String> map = new HashMap<String, String>();
-                map.put("catalog", "1");
 
 
-                map.put("pageIndex", String.valueOf(flag));
-                map.put("pageSize", "20");
-
-
-                return map;
-            }
-        };
-        requestQueue.add(stringRequest);
     }
 
 
+    @Override
+    public void success(String mgs) {
+        progressDialog.cancel();
+        Log.e("headFragment",mgs);
+        XStream xs = new XStream();
+        xs.alias("oschina", HeadXMLBean.class);
+        xs.alias("news", HeadXMLBean.NewsBean.class);
+        HeadXMLBean headXMLBean = (HeadXMLBean) xs.fromXML(mgs);
+        newslist = headXMLBean.getNewslist();
+        newsBeenList.addAll(newslist);
+        headAdapter.notifyDataSetChanged();
+
+
+        if (iiboolean) {
+            headRefreshRv.setLoadMoreComplete();
+        } else {
+            headRefreshRv.setRefreshComplete();
+        }
+    }
+
+    @Override
+    public void fail(String mgs) {
+        Log.e("headFragment",mgs);
+    }
 }

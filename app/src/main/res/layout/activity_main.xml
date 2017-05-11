@@ -7,6 +7,34 @@
     android:orientation="vertical"
     >
 
+    <RelativeLayout
+        android:id="@+id/main_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/drawablegreen"
+        >
+        <TextView
+            android:id="@+id/bar_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="综合"
+            android:layout_centerInParent="true"
+            android:textColor="@color/drawablewrite"
+            android:textSize="25dp"
+            />
+
+        <ImageView
+            android:id="@+id/bar_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/btn_search"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="15dp"
+            />
+    </RelativeLayout>
+
+
+
     <FrameLayout
         android:id="@+id/activity_main_fl"
         android:layout_width="match_parent"

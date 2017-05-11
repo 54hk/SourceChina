@@ -19,7 +19,7 @@ import practice.code.com.sourcechina.entity.RecommendBlogXMLBean;
 public class RecommendBlogsAdapter extends BaseAdapter<RecommendBlogXMLBean.BlogBean> {
 
 
-    public RecommendBlogsAdapter(Context context ,ArrayList<RecommendBlogXMLBean.BlogBean> bolgAlls) {
+    public RecommendBlogsAdapter(Context context ,List<RecommendBlogXMLBean.BlogBean> bolgAlls) {
         super(context, R.layout.head_rc_adapter, bolgAlls);
     }
 

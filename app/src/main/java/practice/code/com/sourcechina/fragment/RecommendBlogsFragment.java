@@ -40,17 +40,23 @@ import practice.code.com.sourcechina.adapter.RecommendBlogsAdapter;
 import practice.code.com.sourcechina.adapter.TestNormalAdapter;
 import practice.code.com.sourcechina.entity.HeadXMLBean;
 import practice.code.com.sourcechina.entity.RecommendBlogXMLBean;
+import practice.code.com.sourcechina.model.HttpUtil.BlogUtil;
+import practice.code.com.sourcechina.model.HttpUtil.NewsUtil;
+import practice.code.com.sourcechina.model.bis.ICallBack;
 
-public class RecommendBlogsFragment extends Fragment {
+public class RecommendBlogsFragment extends Fragment implements ICallBack{
 
 
     PullToRefreshRecyclerView headRefreshRv;
 
     RecommendBlogsAdapter rbAdapter;
    ArrayList<RecommendBlogXMLBean.BlogBean> bolgAlls = new ArrayList<RecommendBlogXMLBean.BlogBean>();
-    private List<RecommendBlogXMLBean.BlogBean> blogs;
+
     int flag = 1;
     ProgressDialog progressDialog;
+    private List<RecommendBlogXMLBean.BlogBean> blogslist;
+    private boolean iiboolean;
+
 
     @Nullable
     @Override
@@ -59,17 +65,14 @@ public class RecommendBlogsFragment extends Fragment {
         headRefreshRv = (PullToRefreshRecyclerView) inflate.findViewById(R.id.rb_refresh_recyclerview);
         progressDialog = new ProgressDialog(getActivity());
         progressDialog.show();
+        initHeadAdapter();
+        getHeadVolley(false);
 
         return inflate;
     }
 
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        getHeadVolley(false);
-        initHeadAdapter();
-    }
+
 
     public void initHeadAdapter() {
         bolgAlls = new ArrayList<>();
@@ -94,44 +97,31 @@ public class RecommendBlogsFragment extends Fragment {
     }
 
     public void getHeadVolley(final boolean isboolean) {
-        String url = "http://www.oschina.net/action/api/blog_list?type=latest&pageIndex="+ flag +"&pageSize=20";
-        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+        BlogUtil.getInstance().getNewsList(flag,this);
+        iiboolean = isboolean;
 
-        StringRequest stringRequest = new StringRequest( url, new Response.Listener<String>() {
-
-
-            private RecommendBlogXMLBean recommendBlogXMLBean;
-
-            @Override
-            public void onResponse(String response) {
-
-                if(flag == 1){
-                    progressDialog.dismiss();
-                }
-
-                XStream xs = new XStream();
-                xs.alias("oschina", RecommendBlogXMLBean.class);
-                xs.alias("blog", RecommendBlogXMLBean.BlogBean.class);
-                recommendBlogXMLBean = (RecommendBlogXMLBean) xs.fromXML(response);
-                //TODO  有助于 自定义 action/api/blog_list 参数
-                blogs = recommendBlogXMLBean.getBlogs();
-                bolgAlls.addAll(blogs);
-                rbAdapter.notifyDataSetChanged();
-
-                if (isboolean) {
-                    headRefreshRv.setLoadMoreComplete();
-                } else {
-                    headRefreshRv.setRefreshComplete();
-                }
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.e("call", error.toString());
-            }
-        });
-        requestQueue.add(stringRequest);
     }
 
+    @Override
+    public void success(String mgs) {
+        Log.e("recomment",mgs);
+        progressDialog.dismiss();
+        XStream xs = new XStream();
+        xs.alias("oschina", RecommendBlogXMLBean.class);
+        xs.alias("blog", RecommendBlogXMLBean.BlogBean.class);
+        RecommendBlogXMLBean recommendBlogXMLBean = (RecommendBlogXMLBean) xs.fromXML(mgs);
+        blogslist = recommendBlogXMLBean.getBlogs();
+        bolgAlls.addAll(blogslist);
+        rbAdapter.notifyDataSetChanged();
+        if (iiboolean) {
+            headRefreshRv.setLoadMoreComplete();
+        } else {
+            headRefreshRv.setRefreshComplete();
+        }
+    }
+
+    @Override
+    public void fail(String mgs) {
+        Log.e("recomment",mgs);
+    }
 }

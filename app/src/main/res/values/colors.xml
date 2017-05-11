@@ -5,4 +5,5 @@
     <color name="colorAccent">#FF4081</color>
     <drawable name="drawablegreen">#1fc219</drawable>
     <drawable name="drawablegray">#000000</drawable>
+    <color name="drawablewrite">#fff</color>
 </resources>
