@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 public class CompositeVPAdapter extends FragmentPagerAdapter {
 
-    String[] arr = new String[]{"开源咨询","推荐博客"};
+    String[] arr = new String[]{"开源咨询","推荐博客","热点资讯"};
     ArrayList<Fragment> fragments;
     public CompositeVPAdapter(FragmentManager fm,ArrayList<Fragment> fragments) {
         super(fm);
@@ -35,5 +35,6 @@ public class CompositeVPAdapter extends FragmentPagerAdapter {
     public CharSequence getPageTitle(int position) {
 
         return arr[position];
+
     }
 }

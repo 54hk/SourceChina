@@ -38,7 +38,6 @@ public class VolleyUtil implements IHttp {
             for(String key :strings){
                 String value = map.get(key);
                 stringBuffer.append(key).append("=").append(value).append("&");
-
             }
             url = url + stringBuffer.toString().substring(0,stringBuffer.length()-1);
         }

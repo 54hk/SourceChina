@@ -14,7 +14,7 @@ import practice.code.com.sourcechina.R;
  * Created by Administrator on 2017/5/10 0010.
  */
 
-public class BallCommentActivity extends AllActivityParent{
+public class BallCommentActivity extends BaseActivity{
 
 
     @Override

@@ -40,7 +40,7 @@ import practice.code.com.sourcechina.entity.HeadXMLBean;
 import practice.code.com.sourcechina.model.HttpUtil.NewsUtil;
 import practice.code.com.sourcechina.model.bis.ICallBack;
 
-public class HeadFragment extends Fragment implements ICallBack{
+public class HeadFragment extends BaseFragemnt implements ICallBack{
 
 
     PullToRefreshRecyclerView headRefreshRv;
@@ -50,29 +50,68 @@ public class HeadFragment extends Fragment implements ICallBack{
     List<HeadXMLBean.NewsBean> newslist;
     int flag = 1;
     private View inflate;
-    private View inflate1;
-    ProgressDialog progressDialog;
-    private boolean iiboolean;
 
-    @Nullable
+    private boolean iiboolean;
+    private RollPagerView mRollViewPager;
+
+
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        inflate1 = inflater.inflate(R.layout.activity_head, null);
+    protected int initView() {
+        return R.layout.activity_head;
+    }
+
+    @Override
+    protected void getOnclick() {
+
+    }
+
+    @Override
+    protected void initLoad(View inflate1) {
+
+        inflate = LayoutInflater.from(getActivity()).inflate(R.layout.roll_layout, null);
+        mRollViewPager = (RollPagerView) inflate.findViewById(R.id.head_pv);
         headRefreshRv = (PullToRefreshRecyclerView) inflate1.findViewById(R.id.head_refresh_recyclerview);
 
-        progressDialog = new ProgressDialog(getActivity());
-        progressDialog.show();
-        rollviewp();
-        initHeadAdapter();
-        getHeadVolley(false);
 
-        return inflate1;
+    }
+
+    @Override
+    protected void getLoad(boolean b) {
+        rollviewp();
+        iiboolean = b;
+        NewsUtil.getInstance().getNewsList(flag,this);
+
+    }
+
+    @Override
+    protected void sendData() {
+
+
+        newsBeenList = new ArrayList<>();
+        headAdapter = new HeadAdapter(getActivity(), newsBeenList);
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        headRefreshRv.setLayoutManager(linearLayoutManager);
+        headRefreshRv.setPullToRefreshListener(new PullToRefreshListener() {
+            @Override
+            public void onRefresh() {
+                newsBeenList.clear();
+                getLoad(false);
+            }
+
+            @Override
+            public void onLoadMore() {
+                flag++;
+                getLoad(true);
+            }
+        });
+        headRefreshRv.addHeaderView(inflate);
+        headRefreshRv.setAdapter(headAdapter);
+
     }
 
 
     public void rollviewp() {
-        inflate = LayoutInflater.from(getActivity()).inflate(R.layout.roll_layout, null);
-        RollPagerView mRollViewPager = (RollPagerView) inflate.findViewById(R.id.head_pv);
 
         //设置播放时间间隔
         mRollViewPager.setPlayDelay(5000);
@@ -83,43 +122,13 @@ public class HeadFragment extends Fragment implements ICallBack{
         mRollViewPager.setHintView(new ColorPointHintView(getActivity(), Color.CYAN, Color.WHITE));
     }
 
-    public void initHeadAdapter() {
-        newsBeenList = new ArrayList<>();
-        headAdapter = new HeadAdapter(getActivity(), newsBeenList);
-
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-        headRefreshRv.setLayoutManager(linearLayoutManager);
-        headRefreshRv.setPullToRefreshListener(new PullToRefreshListener() {
-            @Override
-            public void onRefresh() {
-                newsBeenList.clear();
-                getHeadVolley(false);
-            }
-
-            @Override
-            public void onLoadMore() {
-                flag++;
-                getHeadVolley(true);
-            }
-        });
-        headRefreshRv.addHeaderView(inflate);
-        headRefreshRv.setAdapter(headAdapter);
-
-    }
-
-    public void getHeadVolley(boolean aboolean) {
-
-        iiboolean = aboolean;
-        NewsUtil.getInstance().getNewsList(flag,this);
 
 
-
-    }
 
 
     @Override
     public void success(String mgs) {
-        progressDialog.cancel();
+
         Log.e("headFragment",mgs);
         XStream xs = new XStream();
         xs.alias("oschina", HeadXMLBean.class);

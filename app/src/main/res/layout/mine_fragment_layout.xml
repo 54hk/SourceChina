@@ -30,7 +30,7 @@
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-           android:layout_marginTop="35dp"
+           android:layout_marginTop="55dp"
             android:src="@mipmap/btn_shake_info_actived"
             />
 
@@ -91,6 +91,7 @@
     android:layout_height="wrap_content"
     android:layout_weight="1"
     android:text="0"
+    android:layout_marginTop="8dp"
     android:gravity="center_horizontal"
 
     />
@@ -99,6 +100,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="0"
+                android:layout_marginTop="8dp"
+
                 android:gravity="center_horizontal"
                 />
             <TextView
@@ -106,6 +109,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="0"
+                android:layout_marginTop="8dp"
+
                 android:gravity="center_horizontal"
                 />
             <TextView
@@ -113,6 +118,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="0"
+                android:layout_marginTop="8dp"
+
                 android:gravity="center_horizontal"
                 />
         </LinearLayout>
@@ -275,16 +282,6 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="我的消息"
-            android:textSize="15dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="15dp"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@id/my_event_img"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:text=">"
             android:textSize="25dp"
             android:layout_alignParentRight="true"
@@ -292,6 +289,19 @@
             android:layout_marginRight="25dp"
 
             />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="我的活动"
+            android:textSize="15dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="20dp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/my_event_img"
+            android:layout_toEndOf="@+id/my_event_img"
+            android:layout_marginStart="20dp"
+            android:id="@+id/textView" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -311,7 +321,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="我的消息"
+            android:text="我的团队"
             android:textSize="15dp"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="20dp"
@@ -330,5 +340,5 @@
             />
     </RelativeLayout>
 
-    
+
 </LinearLayout>

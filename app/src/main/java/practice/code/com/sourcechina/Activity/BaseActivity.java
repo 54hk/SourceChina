@@ -1,19 +1,16 @@
 package practice.code.com.sourcechina.Activity;
 
-import android.app.Activity;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 
-/**
- * Created by Administrator on 2017/5/9 0009.
- */
+import practice.code.com.sourcechina.R;
 
-public class AllActivityParent extends AppCompatActivity {
+public class BaseActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_base2);
         APP.activity = this;
-
     }
 }

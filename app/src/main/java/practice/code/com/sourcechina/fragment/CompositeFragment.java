@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import practice.code.com.sourcechina.R;
 import practice.code.com.sourcechina.adapter.CompositeVPAdapter;
 
-public class CompositeFragment extends Fragment {
+public class CompositeFragment extends BaseFragemnt {
 
 
     TabLayout activityCompositeTab;
@@ -37,13 +37,40 @@ public class CompositeFragment extends Fragment {
         fragments.add(headFragment);
         RecommendBlogsFragment recommendBlogsFragment  =   new RecommendBlogsFragment();
         fragments.add(recommendBlogsFragment);
+        WIFIMessageFragment wifiMessageFragment =  new WIFIMessageFragment();
+        fragments.add(wifiMessageFragment);
         CompositeVPAdapter comVPAdapter = new CompositeVPAdapter(getActivity().getSupportFragmentManager(),fragments);
 
         activityCompositeVp.setAdapter(comVPAdapter);
         activityCompositeTab.setupWithViewPager(activityCompositeVp);
-        activityCompositeTab.setTabMode(TabLayout.MODE_SCROLLABLE);
+        activityCompositeTab.setTabMode(TabLayout.MODE_FIXED);
 
         return inflate;
+    }
+
+    @Override
+    protected int initView() {
+        return 0;
+    }
+
+    @Override
+    protected void getOnclick() {
+
+    }
+
+    @Override
+    protected void initLoad(View inflate1) {
+
+    }
+
+    @Override
+    protected void getLoad(boolean b) {
+
+    }
+
+    @Override
+    protected void sendData() {
+
     }
 
 

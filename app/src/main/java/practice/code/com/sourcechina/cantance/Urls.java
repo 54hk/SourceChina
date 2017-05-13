@@ -12,7 +12,11 @@ public class Urls {
     //博客  类别
     public static final String  TYPE = "latest";
 
+    //热点 show
+    public static final String SHOW = "week";
+
     public static final String BASEURL = "http://www.oschina.net/";
     public static final String NEWURL = BASEURL + "action/api/news_list";
     public static final String BLOGURL = BASEURL  +  "action/api/blog_list";
+
 }

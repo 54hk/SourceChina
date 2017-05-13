@@ -44,37 +44,45 @@ import practice.code.com.sourcechina.model.HttpUtil.BlogUtil;
 import practice.code.com.sourcechina.model.HttpUtil.NewsUtil;
 import practice.code.com.sourcechina.model.bis.ICallBack;
 
-public class RecommendBlogsFragment extends Fragment implements ICallBack{
+public class RecommendBlogsFragment extends BaseFragemnt implements ICallBack{
 
 
     PullToRefreshRecyclerView headRefreshRv;
 
     RecommendBlogsAdapter rbAdapter;
    ArrayList<RecommendBlogXMLBean.BlogBean> bolgAlls = new ArrayList<RecommendBlogXMLBean.BlogBean>();
-
     int flag = 1;
-    ProgressDialog progressDialog;
+
     private List<RecommendBlogXMLBean.BlogBean> blogslist;
     private boolean iiboolean;
 
 
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View inflate = inflater.inflate(R.layout.activity_recommend_blogs, null);
-        headRefreshRv = (PullToRefreshRecyclerView) inflate.findViewById(R.id.rb_refresh_recyclerview);
-        progressDialog = new ProgressDialog(getActivity());
-        progressDialog.show();
-        initHeadAdapter();
-        getHeadVolley(false);
 
-        return inflate;
+    @Override
+    protected int initView() {
+        return R.layout.activity_recommend_blogs;
     }
 
+    @Override
+    protected void getOnclick() {
+
+    }
+
+    @Override
+    protected void initLoad(View inflate) {
+        headRefreshRv = (PullToRefreshRecyclerView) inflate.findViewById(R.id.rb_refresh_recyclerview);
 
 
+    }
 
-    public void initHeadAdapter() {
+    @Override
+    protected void getLoad(boolean b) {
+        BlogUtil.getInstance().getNewsList(flag,this);
+        iiboolean = b;
+    }
+
+    @Override
+    protected void sendData() {
         bolgAlls = new ArrayList<>();
         rbAdapter = new RecommendBlogsAdapter(getActivity(),bolgAlls );
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
@@ -83,29 +91,27 @@ public class RecommendBlogsFragment extends Fragment implements ICallBack{
             @Override
             public void onRefresh() {
                 bolgAlls.clear();
-                getHeadVolley(false);
+                getLoad(false);
             }
 
             @Override
             public void onLoadMore() {
                 flag++;
-                getHeadVolley(true);
+                getLoad(true);
             }
         });
         headRefreshRv.setAdapter(rbAdapter);
 
     }
 
-    public void getHeadVolley(final boolean isboolean) {
-        BlogUtil.getInstance().getNewsList(flag,this);
-        iiboolean = isboolean;
 
-    }
+
+
 
     @Override
     public void success(String mgs) {
         Log.e("recomment",mgs);
-        progressDialog.dismiss();
+
         XStream xs = new XStream();
         xs.alias("oschina", RecommendBlogXMLBean.class);
         xs.alias("blog", RecommendBlogXMLBean.BlogBean.class);
