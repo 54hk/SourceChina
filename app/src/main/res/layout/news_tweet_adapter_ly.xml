@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/tweet_params_item"
+    >
+<RelativeLayout
+    android:id="@+id/have_some_re"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/news_tweet_img"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="10dp"
+        android:src="@drawable/drawablegray"
+        />
+
+    <TextView
+        android:id="@+id/news_tweet_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/news_tweet_img"
+        android:text="你好啊"
+        android:textColor="@android:color/background_dark"
+        android:textSize="15sp"
+        android:layout_marginTop="20dp"
+
+        />
+
+    <TextView
+        android:id="@+id/news_tweet_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/news_tweet_img"
+        android:text="你好啊"
+        android:layout_below="@id/news_tweet_title"
+        android:textColor="@android:color/darker_gray"
+        android:layout_marginTop="5dp"
+
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/news_tweet_img"
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/news_tweet_gilde"
+        android:layout_marginBottom="10dp"
+        >
+
+        <TextView
+            android:id="@+id/news_tweet_author_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/darker_gray"
+            />
+
+
+        <CheckBox
+            android:layout_marginLeft="100dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="赞"
+            android:button="@null"
+            android:id="@+id/gret_checkbox"
+            android:drawableLeft="@drawable/thumb"
+            android:textColor="@color/colorhui"
+            android:layout_marginRight="10dp"/>
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/ic_comment"
+            android:id="@+id/comment"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="5dp"
+            />
+        <TextView
+            android:id="@+id/great_comment_sum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="评论"
+            />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/news_tweet_gilde"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_below="@+id/news_tweet_content"
+        android:layout_alignLeft="@+id/news_tweet_content"
+        android:layout_alignStart="@+id/news_tweet_content" />
+
+</RelativeLayout>
+
+    <FrameLayout
+        android:id="@+id/tweet_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/frame_tweet_img"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </FrameLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorhui"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="6dp"
+        />
+
+</RelativeLayout>

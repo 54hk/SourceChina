@@ -1,0 +1,95 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="practice.code.com.sourcechina.fragment.WebViewFragment">
+<LinearLayout
+    android:id="@+id/web_find_top"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:background="@color/colorgreen"
+    >
+   <ImageView
+       android:id="@+id/web_back"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:src="@mipmap/btn_back_normal"
+       android:layout_gravity="center_vertical"
+       android:layout_marginLeft="20dp"
+       />
+
+   <TextView
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:text="资讯详情"
+       android:layout_gravity="center_vertical"
+       android:layout_marginLeft="50dp"
+       android:textColor="@color/drawablewrite"
+       />
+
+
+
+
+</LinearLayout>
+
+
+
+
+
+   <WebView
+       android:id="@+id/head_web_view"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:layout_weight="1"
+       >
+
+   </WebView>
+   
+   <TextView
+       android:layout_width="match_parent"
+       android:layout_height="1dp"
+       android:background="@color/colorhui"
+       />
+   <LinearLayout
+       android:id="@+id/web_find_bow"
+       android:layout_width="match_parent"
+       android:layout_height="50dp"
+       android:orientation="horizontal"
+       >
+      
+      <EditText
+          android:id="@+id/wb_ed"
+          android:layout_width="250dp"
+          android:layout_height="35dp"
+          android:layout_marginLeft="5dp"
+          android:layout_gravity="center_vertical"
+          android:background="@drawable/login_ed"
+          android:drawableLeft="@mipmap/ic_my_question"
+          android:hint="发表评论"
+          android:textSize="12sp"
+
+          />
+
+      <ImageView
+
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:background="@drawable/xing_selecter"
+          android:layout_gravity="center_vertical"
+          android:layout_marginLeft="20dp"
+          />
+
+      <ImageView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:background="@drawable/fengxiang_selecter"
+          android:layout_gravity="center_vertical"
+          android:layout_marginLeft="15dp"
+          />
+
+
+      
+   </LinearLayout>
+
+</LinearLayout>

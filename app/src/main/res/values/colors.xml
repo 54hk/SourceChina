@@ -7,4 +7,5 @@
     <drawable name="drawablegray">#000000</drawable>
     <color name="drawablewrite">#fff</color>
     <color name="colorhui">#c0c0c0</color>
+    <color name="colorgreen">#1fc219</color>
 </resources>

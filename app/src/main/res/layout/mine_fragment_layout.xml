@@ -5,7 +5,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="180dp"
         android:background="@drawable/drawablegreen"
         >
         <ImageView
@@ -26,6 +26,7 @@
             />
 
         <ImageView
+
             android:id="@+id/my_headx"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
@@ -40,7 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:layout_below="@id/my_headx"
-            android:text="吼先生。"
+            android:text="点击头像登录"
             android:textSize="20dp"
             android:textColor="@color/drawablewrite"
             />
@@ -79,6 +80,7 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:weightSum="2"
+        android:background="@drawable/drawablegreen"
         >
 
         <LinearLayout
@@ -91,6 +93,7 @@
     android:layout_height="wrap_content"
     android:layout_weight="1"
     android:text="0"
+    android:textColor="#ffffff"
     android:layout_marginTop="8dp"
     android:gravity="center_horizontal"
 
@@ -100,26 +103,28 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="0"
+                android:textColor="#ffffff"
                 android:layout_marginTop="8dp"
-
                 android:gravity="center_horizontal"
                 />
             <TextView
+                android:id="@+id/favoritecount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="0"
                 android:layout_marginTop="8dp"
-
+                android:textColor="#ffffff"
                 android:gravity="center_horizontal"
                 />
             <TextView
+                android:id="@+id/fan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="0"
                 android:layout_marginTop="8dp"
-
+                android:textColor="#ffffff"
                 android:gravity="center_horizontal"
                 />
         </LinearLayout>
@@ -133,6 +138,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="动弹"
+                android:textColor="#ffffff"
                 android:gravity="center_horizontal"
                 />
             <TextView
@@ -140,6 +146,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="收藏"
+                android:textColor="#ffffff"
                 android:gravity="center_horizontal"
                 />
             <TextView
@@ -147,6 +154,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="关注"
+                android:textColor="#ffffff"
                 android:gravity="center_horizontal"
                 />
             <TextView
@@ -154,6 +162,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="粉丝"
+                android:textColor="#ffffff"
                 android:gravity="center_horizontal"
                 />
         </LinearLayout>

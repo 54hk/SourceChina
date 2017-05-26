@@ -2,7 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="practice.code.com.sourcechina">
 
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature android:name="android.hardware.camera" /> <!-- 使用照相机权限 -->
+    <uses-feature android:name="android.hardware.camera.autofocus" /> <!-- 自动聚焦权限 -->
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_APN_SETTINGS" />
 
     <application
         android:name=".Activity.APP"
@@ -18,8 +24,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity.BallCommentActivity" />
-        <activity android:name=".Activity.BaseActivity"></activity>
+        <activity android:name=".Activity.BaseActivity" />
+        <activity android:name=".Activity.WebViewAtivity"></activity>
+        <activity android:name=".fragment.Shake.ShakeFragment"></activity>
     </application>
 
 </manifest>

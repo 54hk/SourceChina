@@ -28,11 +28,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@mipmap/btn_search"
-            android:layout_alignParentRight="true"
             android:layout_marginRight="15dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
             />
     </RelativeLayout>
-
 
 
     <FrameLayout
@@ -44,6 +44,7 @@
     </FrameLayout>
 
     <RadioGroup
+        android:id="@+id/main_rg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"

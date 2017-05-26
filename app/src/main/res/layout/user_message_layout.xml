@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <RelativeLayout
+        android:id="@+id/me_relative"
+        android:layout_width="match_parent"
+        android:layout_height="230dp"
+        android:background="@color/colorgreen">
+
+        <ImageView
+            android:id="@+id/me_click_setting"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:padding="15dp"
+            android:src="@mipmap/btn_back_normal" />
+
+        <ImageView
+            android:id="@+id/me_click_QRCode"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentRight="true"
+            android:padding="15dp"
+            android:src="@drawable/attention_select" />
+
+        <ImageView
+            android:id="@+id/me_click_headimage"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_below="@+id/me_click_QRCode"
+            android:layout_centerHorizontal="true"
+            android:src="@mipmap/ic_login_username" />
+
+        <ImageView
+            android:id="@+id/me_click_sex"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_alignBottom="@+id/me_click_headimage"
+            android:layout_alignRight="@+id/me_click_headimage"
+            android:src="@mipmap/ic_female" />
+
+        <TextView
+            android:id="@+id/me_click_nickname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/me_click_headimage"
+            android:layout_centerHorizontal="true"
+            android:text="点击头像登录"
+            android:textSize="20dp"
+            android:textColor="#fff" />
+
+        <TextView
+            android:id="@+id/me_click_integration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/me_click_nickname"
+            android:layout_centerInParent="true"
+            android:text="积分"
+            android:textColor="#fff" />
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal"
+            android:weightSum="4">
+
+            <RelativeLayout
+                android:id="@+id/me_click_mytweet"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:text="动弹"
+                    android:textColor="#fff" />
+
+                <TextView
+                    android:id="@+id/me_click_text_mytweet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="5"
+                    android:textColor="#fff"
+                    android:textSize="25sp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/me_click_mycollection"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:text="收藏"
+                    android:textColor="#fff" />
+
+                <TextView
+                    android:id="@+id/me_click_text_mycollection"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="5"
+                    android:textColor="#fff"
+                    android:textSize="25sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/me_click_attention"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:text="关注"
+                    android:textColor="#fff" />
+
+                <TextView
+                    android:id="@+id/me_click_text_attention"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="5"
+                    android:textColor="#fff"
+                    android:textSize="25sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/my_click_myfans"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:text="粉丝"
+                    android:textColor="#fff" />
+
+                <TextView
+                    android:id="@+id/my_click_text_myfans"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="5"
+                    android:textColor="#fff"
+                    android:textSize="25sp" />
+            </RelativeLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+
+</LinearLayout>

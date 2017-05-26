@@ -42,6 +42,11 @@ public class WIFIMessageFragment extends BaseFragemnt implements ICallBack{
 
 
     @Override
+    protected void beginProgressDialog() {
+
+    }
+
+    @Override
     protected int initView() {
         return R.layout.wifi_mgs_layout;
     }
@@ -86,7 +91,6 @@ public class WIFIMessageFragment extends BaseFragemnt implements ICallBack{
         wifiPv.setAdapter(rbAdapter);
 
     }
-
 
 
 

@@ -6,5 +6,5 @@ package practice.code.com.sourcechina.model.bis;
 
 public interface IBlogs {
 
-    void getNewsList(int pageIndex,ICallBack iCallBack);
+    void getNewsList(String latest,int pageIndex,ICallBack iCallBack);
 }

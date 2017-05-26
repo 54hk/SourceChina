@@ -1,27 +1,33 @@
 package practice.code.com.sourcechina.Activity;
 
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentTransaction;
+import android.os.Process;
+import android.support.v4.app.FragmentManager;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import practice.code.com.sourcechina.R;
+import practice.code.com.sourcechina.fragment.BaseFragemnt;
 import practice.code.com.sourcechina.fragment.CompositeFragment;
-import practice.code.com.sourcechina.fragment.HeadFragment;
+import practice.code.com.sourcechina.fragment.FindFragment;
+import practice.code.com.sourcechina.fragment.FindWhatFragment;
 import practice.code.com.sourcechina.fragment.MineFragment;
+import practice.code.com.sourcechina.fragment.PortraitUpdate.PotrUpdateFragment;
 import practice.code.com.sourcechina.fragment.RecommendBlogsFragment;
-import practice.code.com.sourcechina.util.FragmentBuilder;
-import practice.code.com.sourcechina.utils.FragmentBulder;
+import practice.code.com.sourcechina.fragment.TweetFragment;
 
 public class ActivityMain extends BaseActivity {
 
@@ -45,6 +51,8 @@ public class ActivityMain extends BaseActivity {
     RelativeLayout mainBar;
     @Bind(R.id.mine_true)
     RadioButton mineTrue;
+    @Bind(R.id.main_rg)
+    RadioGroup mainRg;
     private CompositeFragment compositeFragment;
     private RecommendBlogsFragment recommendBlogsFragment;
     private MineFragment mineFragment;
@@ -55,50 +63,97 @@ public class ActivityMain extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-
-        FragmentBulder.getInstance().create(CompositeFragment.class);
+//        SimpleFragmentBuilder.getInstance().start(CompositeFragment.class);
+        FragmentUtils.getFragment().init(this).getStart(CompositeFragment.class).build();
         sumBt.setChecked(true);
+
 
     }
 
 
+    public RelativeLayout getMainBar() {
+        return mainBar;
+    }
 
+    public void setMainBar(RelativeLayout mainBar) {
+        this.mainBar = mainBar;
+    }
 
+    public RadioGroup getMainRg() {
+        return mainRg;
+    }
 
-
-
+    public void setMainRg(RadioGroup mainRg) {
+        this.mainRg = mainRg;
+    }
 
     @OnClick({R.id.sum_bt, R.id.ball_bt, R.id.find_bt, R.id.mime_bt})
     public void onViewClicked(View view) {
-//        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-//        hideFragment(transaction);
+
         switch (view.getId()) {
             case R.id.sum_bt:
                 barTxt.setText("综合");
-                FragmentBulder.getInstance().create(CompositeFragment.class);
+//                FragmentBuilder.getInstance().addBack(true).start(CompositeFragment.class).addBack(true).builde();
+//                SimpleFragmentBuilder.getInstance().start(CompositeFragment.class);
+                FragmentUtils.getFragment().init(this).getStart(CompositeFragment.class).build();
                 break;
             case R.id.ball_bt:
                 barTxt.setText("动弹");
-FragmentBulder.getInstance().create(RecommendBlogsFragment.class);
+//                FragmentBuilder.getInstance().addBack(true).start(TweetFragment.class).addBack(true).builde();
+//                SimpleFragmentBuilder.getInstance().start(TweetFragment.class);
+                FragmentUtils.getFragment().init(this).getStart(TweetFragment.class).build();
                 break;
             case R.id.find_bt:
-                barTxt.setText("发现");
+//                FragmentBuilder.getInstance().start(BallCommentFragment.class);
+                FragmentUtils.getFragment().init(this).getStart(BallCommentFragment.class).build();
                 break;
             case R.id.mime_bt:
-
+                barTxt.setText("发现");
+//                FragmentBuilder.getInstance().addBack(true).start(FindFragment.class).addBack(true).builde();
+//                SimpleFragmentBuilder.getInstance().start(FindFragment.class);
+                FragmentUtils.getFragment().init(this).getStart(FindFragment.class).build();
                 break;
         }
     }
 
-
-    @OnClick(R.id.find_bt)
-    public void onViewClicked() {
-        Intent intent = new Intent(ActivityMain.this, BallCommentActivity.class);
-        startActivity(intent);
-    }
-
     @OnClick(R.id.mine_true)
     public void onmineClicked() {
-FragmentBulder.getInstance().create(MineFragment.class);
+        barTxt.setText("我的");
+//        FragmentBuilder.getInstance().addBack(true).start(MineFragment.class).builde();
+//        SimpleFragmentBuilder.getInstance().start(MineFragment.class);
+        FragmentUtils.getFragment().init(this).getStart(MineFragment.class).build();
+    }
+    long firstTime = 0;
+    @Override
+    public void onBackPressed() {
+        //  super.onBackPressed();
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentManager.BackStackEntry entryAt = manager.getBackStackEntryAt(manager.getBackStackEntryCount() - 1);
+        String name = entryAt.getName();
+        if ("FindFragment".equals(name) || "TweetFragment".equals(name) || "MineFragment".equals(name) || "CompositeFragment".equals(name)) {
+            if(System.currentTimeMillis() - firstTime > 2000){
+                Toast.makeText(this, "请再次点击退出", Toast.LENGTH_SHORT).show();
+                firstTime = System.currentTimeMillis();
+            }else {
+                finish();
+                System.exit(0);
+            }
+        } else {
+            Log.d("ActivityMain", "manager.getBackStackEntryCount():" + manager.getBackStackEntryCount());
+            manager.popBackStackImmediate();
+            String name1 = manager.getBackStackEntryAt(manager.getBackStackEntryCount() - 1).getName();
+           // Log.d("ActivityMainmmmm", name1);
+            BaseFragemnt fragmentByTag = (BaseFragemnt) manager.findFragmentByTag(name1);
+            FragmentUtils.getFragment().lastFragment = fragmentByTag;
+        }
+
+    }
+
+
+
+
+    @OnClick(R.id.bar_image)
+    public void onViewClicked() {
+        FragmentUtils.getFragment().init(this).getStart( FindWhatFragment.class).build();
     }
 }

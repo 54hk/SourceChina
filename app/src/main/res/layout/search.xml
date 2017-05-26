@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="#f2f2f2">
+        <TextView
+            android:id="@+id/searchFinish"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="取消"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="10dp"
+            android:textSize="16sp"
+            android:textColor="#24CF5F"/>
+        <RelativeLayout
+            android:layout_toLeftOf="@id/searchFinish"
+            android:id="@+id/aaaa"
+            android:background="@drawable/login_ed"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="5dp">
+            <ImageView
+                android:id="@+id/search"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@mipmap/btn_search_normal"
+                android:layout_centerVertical="true"/>
+        <EditText
+            android:layout_toRightOf="@id/search"
+            android:id="@+id/soft"
+            android:layout_marginLeft="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:background="@null"
+            android:textSize="10dp"
+            android:hint="搜索博客、软件、咨询、问答、找人"
+            android:drawableRight="@mipmap/ic_clear"
+            />
+            <ImageView
+                android:id="@+id/clear"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/ic_clear"
+                />
+        </RelativeLayout>
+        <android.support.design.widget.TabLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@id/aaaa"
+            app:tabSelectedTextColor="@color/colorgreen"
+            app:tabTextColor="#343434"
+            app:tabIndicatorColor="@null"
+            android:id="@+id/searchTable">
+
+        </android.support.design.widget.TabLayout>
+    </RelativeLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/searchViewpaer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </android.support.v4.view.ViewPager>
+
+</LinearLayout>

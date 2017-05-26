@@ -33,6 +33,7 @@ import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import practice.code.com.sourcechina.Activity.APP;
 import practice.code.com.sourcechina.R;
 import practice.code.com.sourcechina.adapter.HeadAdapter;
 import practice.code.com.sourcechina.adapter.TestNormalAdapter;
@@ -40,19 +41,30 @@ import practice.code.com.sourcechina.entity.HeadXMLBean;
 import practice.code.com.sourcechina.model.HttpUtil.NewsUtil;
 import practice.code.com.sourcechina.model.bis.ICallBack;
 
+
 public class HeadFragment extends BaseFragemnt implements ICallBack{
 
 
-    PullToRefreshRecyclerView headRefreshRv;
+        PullToRefreshRecyclerView headRefreshRv;
 
-    HeadAdapter headAdapter;
-    List<HeadXMLBean.NewsBean> newsBeenList;
-    List<HeadXMLBean.NewsBean> newslist;
-    int flag = 1;
-    private View inflate;
+        HeadAdapter headAdapter;
+        List<HeadXMLBean.NewsBean> newsBeenList;
+        List<HeadXMLBean.NewsBean> newslist;
+        int flag = 1;
+        private View inflate;
 
-    private boolean iiboolean;
-    private RollPagerView mRollViewPager;
+        private boolean iiboolean;
+        private RollPagerView mRollViewPager;
+        ProgressDialog progressDialog;
+        int pd = 0;
+
+
+    @Override
+    protected void beginProgressDialog() {
+        progressDialog = ProgressDialog.show(APP.activity,null,"Loading...");
+
+    }
+
 
 
     @Override
@@ -72,7 +84,7 @@ public class HeadFragment extends BaseFragemnt implements ICallBack{
         mRollViewPager = (RollPagerView) inflate.findViewById(R.id.head_pv);
         headRefreshRv = (PullToRefreshRecyclerView) inflate1.findViewById(R.id.head_refresh_recyclerview);
 
-
+        headRefreshRv.addHeaderView(inflate);
     }
 
     @Override
@@ -92,6 +104,14 @@ public class HeadFragment extends BaseFragemnt implements ICallBack{
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         headRefreshRv.setLayoutManager(linearLayoutManager);
+        headRefreshRv.setAdapter(headAdapter);
+
+    }
+
+
+    @Override
+    protected void refish() {
+        super.refish();
         headRefreshRv.setPullToRefreshListener(new PullToRefreshListener() {
             @Override
             public void onRefresh() {
@@ -101,15 +121,24 @@ public class HeadFragment extends BaseFragemnt implements ICallBack{
 
             @Override
             public void onLoadMore() {
+                pd = 1;
                 flag++;
                 getLoad(true);
             }
         });
-        headRefreshRv.addHeaderView(inflate);
-        headRefreshRv.setAdapter(headAdapter);
-
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        pd = 0;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        pd = 0;
+    }
 
     public void rollviewp() {
 
@@ -137,6 +166,10 @@ public class HeadFragment extends BaseFragemnt implements ICallBack{
         newslist = headXMLBean.getNewslist();
         newsBeenList.addAll(newslist);
         headAdapter.notifyDataSetChanged();
+
+        if(pd == 0){
+            progressDialog.dismiss();
+        }
 
 
         if (iiboolean) {

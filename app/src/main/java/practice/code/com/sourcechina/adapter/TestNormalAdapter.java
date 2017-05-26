@@ -27,7 +27,7 @@ public class TestNormalAdapter  extends StaticPagerAdapter {
         ImageView view = new ImageView(container.getContext());
 
         view.setImageResource(imgs[position]);
-        view.setScaleType(ImageView.ScaleType. FIT_XY);
+        view.setScaleType(ImageView.ScaleType. CENTER_CROP);
         view.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         return view;
     }

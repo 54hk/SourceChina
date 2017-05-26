@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_shake_fragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="practice.code.com.sourcechina.fragment.Shake.ShakeFragment">
+
+
+
+    <ImageView
+        android:id="@+id/imasss"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:src="@mipmap/ic_shake"
+        />
+
+    <TextView
+        android:id="@+id/shake_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imasss"
+        android:layout_centerHorizontal="true"
+        />
+
+
+
+    <RelativeLayout
+        android:id="@+id/shake_xian"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_below="@+id/shake_txt"
+        android:layout_marginBottom="30dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="50dp"
+        >
+
+        <ImageView
+            android:id="@+id/shake_img"
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:src="@color/colorPrimary"
+            />
+
+        <TextView
+            android:layout_alignTop="@+id/shake_img"
+            android:id="@+id/shake_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/shake_img"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:maxLines="2"
+            android:layout_marginLeft="10dp"
+            />
+
+        <TextView
+            android:id="@+id/shake_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/shake_img"
+            android:textStyle="italic"
+            android:layout_below="@+id/shake_title"
+            android:layout_marginTop="20dp"
+
+            />
+
+
+
+
+    </RelativeLayout>
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#efefef"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="11dp">
+
+        <RadioButton
+            android:id="@+id/find_but_gift"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="-5sp"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/selector_findshakeone"
+            android:gravity="center"
+            android:text="礼品" />
+
+        <RadioButton
+            android:id="@+id/find_but_info"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="-5dp"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/selector_findshaketwo"
+            android:gravity="center"
+            android:text="咨询" />
+
+
+    </RadioGroup>
+
+
+</RelativeLayout>

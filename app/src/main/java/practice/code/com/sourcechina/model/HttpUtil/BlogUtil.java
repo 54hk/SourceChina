@@ -20,10 +20,10 @@ public class BlogUtil implements IBlogs {
     }
 
     @Override
-    public void getNewsList(int pageIndex, ICallBack iCallBack) {
+    public void getNewsList(String latest,int pageIndex, ICallBack iCallBack) {
 //        String url, Map<String,String> map
         Map<String,String> map = new HashMap<>();
-        map.put("type", Urls.TYPE+"");
+        map.put("type", latest);
         map.put("pageIndex",pageIndex + "");
         map.put("pageSize",Urls.PAGESIZE+"");
         VolleyUtil.getInstance().doGET(Urls.BLOGURL,map,iCallBack);

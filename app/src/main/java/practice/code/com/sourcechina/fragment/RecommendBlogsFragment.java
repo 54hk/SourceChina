@@ -52,11 +52,14 @@ public class RecommendBlogsFragment extends BaseFragemnt implements ICallBack{
     RecommendBlogsAdapter rbAdapter;
    ArrayList<RecommendBlogXMLBean.BlogBean> bolgAlls = new ArrayList<RecommendBlogXMLBean.BlogBean>();
     int flag = 1;
-
     private List<RecommendBlogXMLBean.BlogBean> blogslist;
     private boolean iiboolean;
 
 
+    @Override
+    protected void beginProgressDialog() {
+
+    }
 
     @Override
     protected int initView() {
@@ -77,7 +80,7 @@ public class RecommendBlogsFragment extends BaseFragemnt implements ICallBack{
 
     @Override
     protected void getLoad(boolean b) {
-        BlogUtil.getInstance().getNewsList(flag,this);
+        BlogUtil.getInstance().getNewsList("latest",flag,this);
         iiboolean = b;
     }
 
@@ -107,7 +110,6 @@ public class RecommendBlogsFragment extends BaseFragemnt implements ICallBack{
 
 
 
-
     @Override
     public void success(String mgs) {
         Log.e("recomment",mgs);
@@ -119,6 +121,9 @@ public class RecommendBlogsFragment extends BaseFragemnt implements ICallBack{
         blogslist = recommendBlogXMLBean.getBlogs();
         bolgAlls.addAll(blogslist);
         rbAdapter.notifyDataSetChanged();
+
+
+
         if (iiboolean) {
             headRefreshRv.setLoadMoreComplete();
         } else {
